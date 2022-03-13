@@ -49,3 +49,38 @@ Ex.) Role.NORMAL = 12
 enum Role { ADMIN = 5, AUTHOR = 11, NORMAL };
   // (enum member) Role.ADMIN = 0
 ```
+
+### Literal Types
+
+Often used in combination with union types. The resultConversion will be forced to be one of the two strings. Handy when you only have a couple of options for something and dont need a map like type like an enum
+
+```ts
+const num1 = 2.8;
+//  Type is inferred but it is literal as it is the exact literal number 2.8 (consider it like a hard coded type & value)
+
+
+function combine(
+  input1: number | string
+  input2: number | string
+  resultConversion: 'as-text' | 'as-number'
+  ) {
+
+}
+```
+
+### Aliases
+
+Can be used with union types, giving a good name to avoid repetition and give some abstraction. Also can be used for say complex objects, for example a AdminUser type or something.
+
+```ts
+type Combinable = number | string;
+type ConversionDescriptor = 'as-text' | 'as-number';
+
+function combine(
+  input1: Combinable
+  input2: Combinable
+  resultConversion: ConversionDescriptor
+  ) {
+
+}
+```

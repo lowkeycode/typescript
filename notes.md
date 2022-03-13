@@ -84,3 +84,78 @@ function combine(
 
 }
 ```
+
+
+### Function Types
+
+We can set variables that we want to use to hold pointers to functions that we will call later in our code by giving them the type of Function.
+
+```ts
+const add = (a: number, b: number) => {
+  return a + b;
+}
+
+const printStuff = () => {
+  console.log('Printing stuff')
+}
+
+let combine;
+
+const combine = add;
+
+combine = 25;
+// This causes a runtime error
+// OR
+combine = printStuff;
+// This also cause a runtime error
+
+console.log(combine(5, 10))
+```
+
+Assigning a Function type
+
+```ts
+const add = (a: number, b: number) => {
+  return a + b;
+}
+
+const printStuff = () => {
+  console.log('Printing stuff')
+}
+
+let combine: Function;
+
+const combine = add;
+
+combine = 25;
+// Typescript now catches this error at compilation
+// BUT
+combine = printStuff;
+// This one still causes an error at runtime
+
+console.log(combine(5, 10))
+```
+
+To make things even better we can get more specific with our function defining what types our function should take in as well as what it should return. (When assigning function type we can use whatever params we want in the type definition)
+
+```ts
+const add = (a: number, b: number) => {
+  return a + b;
+}
+
+const printStuff = () => {
+  console.log('Printing stuff')
+}
+
+let combine: (num1: number, num2: number) => number;
+
+const combine = add;
+
+// Now both below will cause a compilation error
+combine = 25;
+combine = printStuff;
+
+console.log(combine(5, 10))
+```
+
+Callback functions can be defined in the () as a parameter when defining the higher order function the exact same way as above

@@ -159,3 +159,20 @@ console.log(combine(5, 10))
 ```
 
 Callback functions can be defined in the () as a parameter when defining the higher order function the exact same way as above
+
+### Watch Mode
+
+The TS compiler has watch mode built in
+
+tsc app.ts --watch
+OR
+tsc app.ts -w
+
+
+Slap a...
+
+```json
+"start": "lite-server & tsc app.ts -w"
+```
+
+...in your package.json and bob's your fuckin' uncle

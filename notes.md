@@ -170,9 +170,51 @@ tsc app.ts -w
 
 
 Slap a...
-
 ```json
 "start": "lite-server & tsc app.ts -w"
 ```
-
 ...in your package.json and bob's your fuckin' uncle
+
+
+
+##### If we want to watch any TS file in our project for compilation
+
+tsc --init
+
+Which creates a tsconfig.json
+
+tsc
+
+To manually compile all files
+
+or......
+
+Slap a...
+```json
+"start": "lite-server & tsc -w"
+```
+...in your package.json and bob's your fuckin' uncle
+
+
+### TS Config
+
+tsconfig.json
+```json
+"exclude": [
+    "analytics.ts",
+    "*.dev.ts",
+    "**/*.dev.ts",
+    "node_modules" 
+    // node modules is excluded by default, but if you have the exclude option set here, add it to the array
+  ],
+  "include": [
+    "app.ts"
+    // Can also set full folders to include. Additionally keep in mind the compile goes step goes all includes minus the excludes
+  ],
+  "files": [
+    // Ver specific include for compilation...probably only used for smaller projects
+    "app.ts"
+  ]
+```
+
+

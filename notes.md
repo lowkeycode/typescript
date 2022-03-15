@@ -219,13 +219,4 @@ tsconfig.json
   ]
 ```
 
-## Classes & Interfaces
-
-### OOP
-
-Using objects to model real life things to make them easier to reason about. Ex.) Product List, Single Product, Shopping Cart
-
-Classes & Instances:
-
-Classes are blueprints for creating similar objects with reuseable functionality and inheritance
-
+## Interfaces

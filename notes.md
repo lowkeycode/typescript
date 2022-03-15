@@ -219,4 +219,66 @@ tsconfig.json
   ]
 ```
 
-## Interfaces
+## Advanced Types
+
+### Intersection Types
+
+Allow us to combine types. They can be used with any types and are defined using the ampersand &. Below we can see them with custom object types as well as with union types. The same effect can be achieved with interfaces and extending if desired.
+
+```ts
+type Admin = {
+  name: string;
+  privileges: string[]
+}
+
+type Employee = {
+  name: string;startDate: Date;
+}
+
+type ElevatedEmployee = Admin & Employee;
+
+const el1: ElevatedEmployee = {
+  name: 'Cam',
+  privileges: ['create-server'],
+  startDate: new Date()
+}
+
+type Combinable = string | number;
+type Numeric = number | boolean;
+
+type Universal = Combinable & Numeric;
+```
+
+### Type Guards
+
+Many times function will utilize different types. This can be common with union types. So we need to use type guards to ensure the logic runs properly while still allowing us to use the benefit of things like union types and type intersections.
+
+```ts
+function add(a: Combinable, b: Combinable) {
+  if (typeof a === 'string' || typeof b === 'string') {
+    return a.toString() + b.toString();
+  }
+  return a + b;
+}
+```
+
+More type guards with functions. Keep in mind here we need to use the in key word and not check with dot . or bracket [] notation as it will error .
+
+```ts
+type UnknownEmployee = Employee | Admin;
+
+function printEmployeeInfo(employee: UnknownEmployee) {
+  if('privileges' in employee) {
+    console.log(`Privileges: ${employee.privileges}`)
+  }
+
+  if('startDate' in employee) {
+    console.log(`Start date: ${employee.startDate}`)
+  }
+}
+
+printEmployeeInfo(e1);
+```
+
+
+With classes we can use the instance of operator for type guards. Can't really use type guards with interfaces because they're a typescript feature not javascript.

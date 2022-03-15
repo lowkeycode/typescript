@@ -282,3 +282,62 @@ printEmployeeInfo(e1);
 
 
 With classes we can use the instance of operator for type guards. Can't really use type guards with interfaces because they're a typescript feature not javascript.
+
+
+### Discriminated Unions
+
+Instead of trying to check for a property existing on an object, we can use object types or interfaces with a property we know exists (convention is usually calling it type or kind). Then we can use a switch statement to perform our control flow which will have type safety. As well as when instantiating this it now has type safety.
+
+```ts
+interface Bird {
+  type: 'bird';
+  flyingSpeed: number;
+}
+
+interface Horse {
+  type: 'horse';
+  runningSpeed: number;
+}
+
+type Animal = Bird | Horse;
+
+function moveAnimal(animal: Animal) {
+  let speed;
+  switch(animal.type) {
+    case 'bird':
+      speed = animal.flyingSpeed;
+      break;
+    case 'horse':
+      speed = animal.runningSpeed;
+      break;
+  }
+
+  console.log(`Moving at speed: ${speed}`);
+}
+
+moveAnimal({ type: 'bird', flyingSpeed: 50 })
+```
+
+### Type Casting
+
+Helps you tell TS that a value is a specific type that TS does not know what it will be.
+
+Here for example TS does not know if there will be an element in the DOM with the id of user-input as it does not check our HTML. So we put the ! after it to tell TS that it will either be there OR it wil be undefined as kind of a work around.
+
+Furthermore it does not know that this userInputEl now will have a .value attribute on it or not, so it throws an error.
+
+This is where we need to type cast and tell Typescript what the type is going to be. There are 2 ways.
+
+1. Using the <> syntax with the type before
+2. Using the as keyword after
+
+The second syntax is provided by TS as the angle brackets <> cause issues with react's jsx. Pick one and stick to it for the project.
+
+```ts
+const userInputEl = <HTMLInputElement>document.getElementById('user-input')!;
+// OR
+const userInputEl = document.getElementById('user-input')! as HTMLInputElement;
+
+userInputEl.value = 'Hi there';
+```
+

@@ -160,6 +160,8 @@ console.log(combine(5, 10))
 
 Callback functions can be defined in the () as a parameter when defining the higher order function the exact same way as above
 
+## Compiler & Config
+
 ### Watch Mode
 
 The TS compiler has watch mode built in
@@ -217,4 +219,13 @@ tsconfig.json
   ]
 ```
 
+## Classes & Interfaces
+
+### OOP
+
+Using objects to model real life things to make them easier to reason about. Ex.) Product List, Single Product, Shopping Cart
+
+Classes & Instances:
+
+Classes are blueprints for creating similar objects with reuseable functionality and inheritance
 
